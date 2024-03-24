@@ -4,16 +4,16 @@ import { FaInstagram } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
 import logo from "../assets/logo.svg";
 
 export function Header() {
   const [activeItem, setActiveItem] = useState<string>("");
   const [toggle, setToggle] = useState(false);
-  const handleMenuItemClick = (itemName: string) => {
-    setActiveItem(itemName);
+  const handleMenuItemClick = (itemName: string,) => {
+    setActiveItem(itemName);    
   };
-
   return (
     <>
       <nav className="Desktop-menu mobile:hidden">
@@ -62,8 +62,8 @@ export function Header() {
                       : "border-none"
                   }`}
                 >
-                  {item}
-                </p>
+                <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+               </p>
               ))}
             </div>
             <button className="text-sm border border-[#2C2F24] rounded-3xl px-5 font-semibold h-10">
@@ -129,7 +129,7 @@ export function Header() {
                         : "border-none"
                     }`}
                   >
-                    {item}
+                <Link to={`/${item.toLowerCase()}`}>{item}</Link>
                   </p>
                 ))}
               </div>

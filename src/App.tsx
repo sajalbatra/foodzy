@@ -1,11 +1,15 @@
-import Hero from "./components/Hero"
-import Menu from "./components/Menu/Menu"
-
+import { Routes ,Route,Navigate} from "react-router-dom"
+import Home from "./Home"
+import About from "./components/About"
 export default function App() {
+  
   return (
     <>
-    <Hero/>
-    <Menu/>
+      <Routes>
+      <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
+      </Routes>
     </>
   )
 }
