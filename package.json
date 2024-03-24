@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "animejs": "^3.2.2",
+    "gsap": "^3.12.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1"

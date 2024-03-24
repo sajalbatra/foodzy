@@ -117,7 +117,7 @@ export function Header() {
           </div>
           {/* div of button and menu */}
           {toggle ? (
-            <div className="z-10 flex flex-col max-w-[25%] gap-2 ml-[79%] mr-0 overflow-x-hidden">
+            <div className="z-10 flex flex-col max-w-[30%] gap-2 ml-[70%] overflow-x-hidden ">
               <div className="flex flex-col items-center text-xl cursor-pointer font-dmsans">
                 {["Home", "About", "Menu", "Pages", "Contact"].map((item) => (
                   <p
@@ -133,7 +133,7 @@ export function Header() {
                   </p>
                 ))}
               </div>
-              <button className="text-sm border border-[#2C2F24] rounded-3xl font-semibold py-1 mx-5 ">
+              <button className="text-sm border border-[#2C2F24] rounded-3xl font-semibold px-1  ">
                 Book A Table
               </button>
             </div>
