@@ -10,6 +10,7 @@ const Menucard = (props: MenuItem) => {
       </div>
     )
   }
+
   
   export default Menucard;
   
