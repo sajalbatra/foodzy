@@ -1,45 +1,147 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 import { CiFacebook, CiPhone } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
+
 import logo from "../assets/logo.svg";
 
 export function Header() {
-    const [activeItem, setActiveItem] = useState<string>('');
-    const handleMenuItemClick = (itemName :string) => {
-        setActiveItem(itemName);
-    };
+  const [activeItem, setActiveItem] = useState<string>("");
+  const [toggle, setToggle] = useState(false);
+  const handleMenuItemClick = (itemName: string) => {
+    setActiveItem(itemName);
+  };
 
-    return (
-        <nav>
-            <section className="bg-[#474747] text-xl flex justify-between text-white px-4 py-2">
-                <div className="flex space-x-4 items-center ">
-                    <div className='flex items-center gap-1 '><p><CiPhone /></p>(414)857-0097</div>
-                    <div className='flex items-center gap-1 '><p className='mt-1.5'><MdOutlineEmail /></p>yummy@foodzy.com</div>
-                </div>
-                <div className="flex space-x-4">
-                    <a href="https://instagram.com" aria-label="Instagram"><FaInstagram /></a>
-                    <a href="https://facebook.com" aria-label="Facebook"><CiFacebook /></a>
-                    <a href="https://twitter.com" aria-label="Twitter"><RiTwitterXFill /></a>
-                </div>
-            </section>
+  return (
+    <>
+      <nav className="Desktop-menu mobile:hidden">
+        <section className="bg-[#474747] text-xl flex justify-between text-white px-4 py-2  ">
+          <div className="flex items-center space-x-4 ">
+            <div className="flex items-center gap-1 ">
+              <p>
+                <CiPhone />
+              </p>
+              (414)857-0097
+            </div>
+            <div className="flex items-center gap-1 ">
+              <p className="mt-1.5">
+                <MdOutlineEmail />
+              </p>
+              yummy@foodzy.com
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <a href="https://instagram.com" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="https://facebook.com" aria-label="Facebook">
+              <CiFacebook />
+            </a>
+            <a href="https://twitter.com" aria-label="Twitter">
+              <RiTwitterXFill />
+            </a>
+          </div>
+        </section>
+
+        <section className="flex justify-around mt-5">
+          <div className="flex space-x-5 text-[#474747] items-center">
+            <img src={logo} alt="logo" />
+            <p className="text-4xl italic font-playfair">Foodzy</p>
+          </div>
+          <div className="flex items-center justify-center space-x-5">
+            <div className="flex items-center space-x-4 text-xl cursor-pointer font-dmsans ">
+              {["Home", "About", "Menu", "Pages", "Contact"].map((item) => (
+                <p
+                  key={item}
+                  onClick={() => handleMenuItemClick(item)}
+                  className={`${
+                    activeItem === item
+                      ? "border bg-[#DBDFD0] rounded-xl px-3 font-semibold justify-around"
+                      : "border-none"
+                  }`}
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+            <button className="text-sm border border-[#2C2F24] rounded-3xl px-5 font-semibold h-10">
+              Book A Table
+            </button>
+          </div>
+        </section>
+      </nav>
+
+      <nav className="Mobile-menu lg-device:hidden">
+        <section className="bg-[#474747] text-xl flex justify-between text-white px-4 py-2  ">
+          <div className="flex items-center space-x-4 ">
+            <div className="flex items-center gap-1 ">
+              <a href="dail:(414)857-0097" className="text-white ">
+                <CiPhone />
+              </a>
+            </div>
+            <div className="flex items-center gap-1 ">
+              <a className="" href="mailto:yummy@foodzy.com">
+                <MdOutlineEmail />
+              </a>
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <a href="https://instagram.com" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="https://facebook.com" aria-label="Facebook">
+              <CiFacebook />
+            </a>
+            <a href="https://twitter.com" aria-label="Twitter">
+              <RiTwitterXFill />
+            </a>
+          </div>
+        </section>
+
+        <section className="mt-5">
+          {/* div of log only  */}
+          <div className="flex justify-between text-[#474747] items-center">
+            <div className="flex space-x-5 text-[#474747] items-center ml-2">
+              <img src={logo} alt="logo" />
+              <p className="text-4xl italic font-playfair">Foodzy</p>
+            </div>
+            <GiHamburgerMenu
+              className="flex justify-end mr-5 text-3xl cursor-pointer"
+              onClick={() => {
+                setToggle(!toggle);
+                console.log(toggle);
+              }}
+            />
+          </div>
+          {/* div of button and menu */}
+          {toggle ? (
+            <div className="z-10 flex flex-col max-w-[25%] gap-2 ml-[79%] mr-0 overflow-x-hidden">
+              <div className="flex flex-col items-center text-xl cursor-pointer font-dmsans">
+                {["Home", "About", "Menu", "Pages", "Contact"].map((item) => (
+                  <p
+                    key={item}
+                    onClick={() => handleMenuItemClick(item)}
+                    className={`${
+                      activeItem === item
+                        ? "border bg-[#DBDFD0] rounded-xl px-3 font-semibold justify-around"
+                        : "border-none"
+                    }`}
+                  >
+                    {item}
+                  </p>
+                ))}
+              </div>
+              <button className="text-sm border border-[#2C2F24] rounded-3xl font-semibold py-1 mx-5 ">
+                Book A Table
+              </button>
+            </div>
             
-            <section className='flex justify-around mt-5'>
-                <div className='flex space-x-5 text-[#474747] items-center'>
-                    <img src={logo} alt="logo" />
-                    <p className=' font-playfair text-4xl italic'>Foodzy</p>
-                </div>
-                <div className='flex gap-4 font-dmsans text-xl cursor-pointer items-center'>
-                    {['Home', 'About', 'Menu', 'Pages', 'Contact'].map((item) => (
-                        <p key={item} onClick={() => handleMenuItemClick(item)} 
-                            className={`${activeItem === item ? 'border bg-[#DBDFD0] rounded-xl px-3 font-semibold' : 'border-none'}`}>
-                            <a href={`/${item}`} target="_blank" rel="noopener noreferrer">{item}</a>
-                        </p>
-                    ))}
-                </div>
-                <button className='text-sm border border-[#2C2F24] rounded-3xl px-5 font-semibold'>Book A Table</button>
-            </section>
-        </nav>
-    );
+
+          ) : null}
+        </section>
+      </nav>
+    </>
+  );
 }

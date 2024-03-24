@@ -9,7 +9,14 @@ export default {
       fontFamily:{
         'playfair': ['"Playfair Display"', 'serif'] ,// Add the font family here
         'dmsans': ['"DM Sans"', 'serif'] 
-      }
+      },
+      screens: {
+
+        'mobile': {'min': '0px', 'max': '680px'},
+
+        'lg-device': {'min': '681px'},
+        // => @media (min-width: 640px and max-width: 767px) { ... }
+      },
     },
   },
   plugins: [],
