@@ -5,7 +5,6 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
-
 import logo from "../assets/logo.svg";
 
 export function Header() {
@@ -46,13 +45,15 @@ export function Header() {
         </section>
 
         <section className="flex justify-around mt-5">
+          <Link to="/">
           <div className="flex space-x-5 text-[#474747] items-center">
             <img src={logo} alt="logo" />
             <p className="text-4xl italic font-playfair">Foodzy</p>
           </div>
+          </Link>
           <div className="flex items-center justify-center space-x-5">
             <div className="flex items-center space-x-4 text-xl cursor-pointer font-dmsans ">
-              {["Home", "About", "Menu", "Pages", "Contact"].map((item) => (
+              {["Home", "About", "Menu", "Pages", "User"].map((item) => (
                 <p
                   key={item}
                   onClick={() => handleMenuItemClick(item)}
@@ -63,6 +64,7 @@ export function Header() {
                   }`}
                 >
                 <Link to={`/${item.toLowerCase()}`}>{item}</Link>
+                
                </p>
               ))}
             </div>
@@ -103,10 +105,12 @@ export function Header() {
         <section className="mt-5">
           {/* div of log only  */}
           <div className="flex justify-between text-[#474747] items-center">
+          <Link to="/">
             <div className="flex space-x-5 text-[#474747] items-center ml-2">
               <img src={logo} alt="logo" />
               <p className="text-4xl italic font-playfair">Foodzy</p>
             </div>
+            </Link>
             <GiHamburgerMenu
               className="flex justify-end mr-5 text-3xl cursor-pointer"
               onClick={() => {
@@ -119,7 +123,7 @@ export function Header() {
           {toggle ? (
             <div className="z-10 flex flex-col max-w-[30%] gap-2 ml-[70%] overflow-x-hidden ">
               <div className="flex flex-col items-center text-xl cursor-pointer font-dmsans">
-                {["Home", "About", "Menu", "Pages", "Contact"].map((item) => (
+                {["Home", "About", "Menu", "Pages", "User"].map((item) => (
                   <p
                     key={item}
                     onClick={() => handleMenuItemClick(item)}

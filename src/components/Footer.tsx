@@ -8,7 +8,7 @@ const Footer = () => {
     const date=new Date();
     const year=date.getFullYear()
     return (
-        <div className="bg-[#474747] text-[#ffffff]">
+        <div className="bg-[#474747] text-[#ffffff] mt-5">
     <div className="bg-[#474747] flex justify-around text-[#ffffff] gap-10 p-10 flex-wrap-reverse">
       {/* div one  */}
       <div className="flex flex-col justify-evenly">

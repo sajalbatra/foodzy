@@ -1,6 +1,8 @@
 import { Routes ,Route,Navigate} from "react-router-dom"
 import Home from "./Home"
 import About from "./components/About"
+import Menu from "./components/MenuPage/Menu"
+import Blogs from "./components/Blogs"
 export default function App() {
   
   return (
@@ -9,6 +11,9 @@ export default function App() {
       <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/" element={<Home/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/menu" element={<Menu/>}/>
+        <Route path="/pages" element={<Blogs/>}/>
+
       </Routes>
     </>
   )
