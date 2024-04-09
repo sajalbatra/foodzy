@@ -121,7 +121,7 @@ export function Header() {
           </div>
           {/* div of button and menu */}
           {toggle ? (
-            <div className="z-10 flex flex-col max-w-[30%] gap-2 ml-[70%] overflow-x-hidden ">
+            <div className="z-10 flex flex-col max-w-[30%] gap-2 ml-[72%] overflow-x-hidden absolute bg-white/30 backdrop-blur-md">
               <div className="flex flex-col items-center text-xl cursor-pointer font-dmsans">
                 {["Home", "About", "Menu", "Pages", "User"].map((item) => (
                   <p
