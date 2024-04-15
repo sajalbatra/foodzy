@@ -24,6 +24,7 @@ const Forms: React.FC = () => {
     email: "",
     password: "",
   });
+  const backendurl="https://foodzy-backend.vercel.app/api/v1/user";
   useEffect(() => {
     // Check if token exists in the browser's local storage
     const token = localStorage.getItem('token');
@@ -70,7 +71,6 @@ const Forms: React.FC = () => {
     }
   };
 
-  const backendurl="https://foodzy-backend.vercel.app/api/v1/user";
 
   if (userDetails) {
     // User details available, display them
