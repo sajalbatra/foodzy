@@ -1,5 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
+const secretKey = process.env.SECRET_KEY;
 
 export const userSignup = async (req, res) => {
   try {
@@ -33,10 +35,17 @@ export const userSignup = async (req, res) => {
       password: hashedPassword,
     });
     await newuser.save();
-    res
-      .status(201)
-      .json({ success: true, message: "User registered successfully" });
-  } catch (error) {
+    const token=jwt.sign({
+      userID: newuser._id
+    }, secretKey, { expiresIn: 60 * 60 });
+    res.header('Authorization', `Bearer ${token}`);
+    res.header('X-Token-Expires-In', '3600');
+    return res.json({
+      status: true,
+      message: "Login successful.",
+      token: token,
+    }); 
+  }catch (error) {
     console.error("Error registering user:", error);
     res
       .status(500)
@@ -46,25 +55,18 @@ export const userSignup = async (req, res) => {
 
 export const userLogin = async (req, res) => {
   try {
-    const { userName, email,  password } = req.body;
-    //console.log(userName, email,  password)
-    if (!userName || !email || !password)  {
-      res.json({
-        status: false,
-        message: "All fields are required.",
-      });
-    }
+    const { userName, email, password } = req.body;
 
     const existingUser = await User.findOne({ $or: [{ email }, { userName }] });
-    //console.log(existingUser)
+    
     if (!existingUser) {
       return res.json({
         status: false,
         message: "Invalid username or password.",
       });
     }
-    //console.log(existingUser.userName)
-    const passwordMatch = await bcrypt.compare(password,existingUser.password);
+
+    const passwordMatch = await bcrypt.compare(password, existingUser.password);
     
     if (!passwordMatch) {
       return res.json({
@@ -72,6 +74,18 @@ export const userLogin = async (req, res) => {
         message: "Invalid username or password.",
       });
     }
+
+    // If the user exists and the password matches, generate and return a token
+    const token = jwt.sign({
+      userID: existingUser._id
+    }, secretKey, { expiresIn: 60 * 60 });
+    res.header('Authorization', `Bearer ${token}`);
+    res.header('X-Token-Expires-In', '3600');
+    return res.json({
+      status: true,
+      message: "Login successful.",
+      token: token,
+    });
   } catch (error) {
     console.error("Error in user login:", error);
     res.status(500).json({ error: "An error occurred in user login" });
