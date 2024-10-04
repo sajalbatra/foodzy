@@ -1,7 +1,3 @@
-Here's a structured `README.md` for your open-source project **Foodzy**:
-
----
-
 # Foodzy 🍽️
 
 Welcome to **Foodzy**, a modern and user-friendly platform for exploring delicious menus, booking tables, and enjoying culinary delights. This project is open-source and aims to offer a delightful restaurant experience through its clean and simple design.
@@ -83,12 +79,3 @@ We welcome contributions to **Foodzy**! Here's how you can help:
 
 Please make sure to follow the code style and conventions used in the project.
 
----
-
-## License
-
-This project is licensed under the MIT License. Feel free to use and modify the code for personal and commercial purposes. See the [LICENSE](LICENSE) file for more details.
-
----
-
-Happy coding! 🎉
