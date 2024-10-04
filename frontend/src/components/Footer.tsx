@@ -1,7 +1,7 @@
 import logo from "../assets/whitelogo.svg";
 import { CiFacebook } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
-import { RiTwitterXFill } from "react-icons/ri";
+import { FaTwitter } from "react-icons/fa";
 import followinsta from "../assets/followinsta.svg";
 
 const Footer = () => {
@@ -28,7 +28,7 @@ const Footer = () => {
               <CiFacebook />
             </a>
             <a href="https://twitter.com" aria-label="Twitter">
-              <RiTwitterXFill />
+            <FaTwitter />
             </a>
           </div>
         </div>

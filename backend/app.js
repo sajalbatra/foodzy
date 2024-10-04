@@ -5,7 +5,7 @@ import userRouter from "./routes/user.route.js"
 const app=express()
 app.use(express.json());
 const corsOptions = {
-    origin: 'https://foodzyy.vercel.app'
+    origin: '*'
 };
 app.use(cors(corsOptions));
 

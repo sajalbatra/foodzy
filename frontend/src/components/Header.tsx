@@ -64,8 +64,7 @@ export function Header() {
                   }`}
                 >
                 <Link to={`/${item.toLowerCase()}`}>{item}</Link>
-                
-               </p>
+              </p>
               ))}
             </div>
             <button className="text-sm border border-[#2C2F24] rounded-3xl px-5 font-semibold h-10">
