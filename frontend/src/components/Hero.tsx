@@ -10,10 +10,10 @@ const Hero = () => {
           welcoming, culinary haven.
         </p>
         <div className="flex gap-4">
-          <button className="bg-[#AD343E] p-2 px-4 rounded-[118px] text-[#FFF] text-[1.2rem] border-white">
+          <button className="bg-[#AD343E] hover:bg-[#FF5C5C] transition-transform  hover:scale-105 duration-300 ease-out p-2 px-4 rounded-[118px] text-[#FFF] text-[1.2rem] border-white">
             Book A Table
           </button>
-          <button className="p-1.5 rounded-[118px]  border border-black text-[1.2rem]">
+          <button className="p-1.5 rounded-[118px] bg-[#32CD32] hover:bg-[#66E066]  transition-transform  hover:scale-105 duration-300 ease-out  border border-black text-[1.2rem] px-2">
             Explore Menu
           </button>
         </div>
