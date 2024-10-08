@@ -7,9 +7,16 @@
         "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\""
     },
     "devDependencies": {
-        "concurrently": "^7.0.0"
+        "@types/react": "^18.3.11",
+        "autoprefixer": "^10.4.20",
+        "concurrently": "^7.0.0",
+        "tailwindcss": "^3.4.13"
     },
     "dependencies": {
-        "foodzy": "file:"
+        "@vitejs/plugin-react": "^4.3.2",
+        "foodzy": "file:",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-router-dom": "^6.26.2"
     }
 }
