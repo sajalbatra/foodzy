@@ -6,7 +6,7 @@ interface DishecardProps extends MenuItem {
 
 const Dishecard = ({ image, title, description, price, tag, showTag }: DishecardProps) => {
   return (
-    <div className="flex flex-col items-center justify-center max-w-xs overflow-hidden transition-all duration-100 bg-white rounded shadow-lg cursor-pointer hover:ease-in-out hover:shadow-2xl">
+    <div className="h-full flex flex-col items-center justify-center max-w-xs overflow-hidden transition-all duration-100 bg-white rounded shadow-lg cursor-pointer hover:ease-in-out hover:shadow-2xl">
       <div className="flex items-center justify-center w-full h-40">
         <img className="object-contain max-h-full rounded-lg" src={image} alt={title + ' image'} />
       </div>
