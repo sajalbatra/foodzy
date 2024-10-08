@@ -15,7 +15,7 @@ export function Header() {
   };
   return (
     <>
-      <nav className="Desktop-menu mobile:hidden">
+      <nav className="Desktop-menu mobile:hidden bg-white sticky top-0">
         <section className="bg-[#474747] text-xl flex justify-between text-white px-4 py-2  ">
           <div className="flex items-center space-x-4 ">
             <div className="flex items-center gap-1 ">
