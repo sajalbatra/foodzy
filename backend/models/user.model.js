@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     maxlength: 10,
   },
-  email: { 
-    type: String, 
-    required: true, 
-    unique: true 
+  email: {
+    type: String,
+    required: true,
+    unique: true
   },
   role: {
     type: String,
@@ -26,12 +26,12 @@ const userSchema = new mongoose.Schema({
     default: "user",
   },
   password: {
-    type: String, 
-    required: true 
+    type: String,
+    required: true
   },
-  createdAt:{ 
-    type: Date, 
-    default: Date.now 
+  createdAt:{
+    type: Date,
+    default: Date.now
   },
 
 });
