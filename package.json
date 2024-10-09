@@ -15,6 +15,7 @@
     "dependencies": {
         "@vitejs/plugin-react": "^4.3.2",
         "foodzy": "file:",
+        "nodemon": "^3.1.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-router-dom": "^6.26.2"
