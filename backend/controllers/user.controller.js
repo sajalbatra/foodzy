@@ -6,6 +6,8 @@ import { generateToken, generateRefreshToken } from "../utils/generateToken.js";
 export const userSignup = async (req, res) => {
   try {
     const { name, userName, email, phoneNumber, password } = req.body;
+
+    console.log({val : req.body})
     if ((!name, !userName, !email, !phoneNumber, !password)) {
       res.json({
         status: false,
