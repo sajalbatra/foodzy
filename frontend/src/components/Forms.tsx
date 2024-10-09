@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import axios from "axios";
 import backgroundimg from "../assets/bgimg.png";
+import RestaurantAuth from "./restaurantAuth/RestaurantAuth";
 
 interface FormData {
   name: string;
@@ -25,10 +26,20 @@ const Forms: React.FC = () => {
     email: "",
     password: "",
   });
+<<<<<<< HEAD
   const [isTransitioning, setIsTransitioning] = useState(false); // State to handle form transitions
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL || "";
 
+=======
+  const [isRestaurant, setisRestaurant] = useState<Boolean>(false)
+
+
+  const toggleForm = () => {
+    setisRestaurant(!isRestaurant);
+  }
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || ""; 
+>>>>>>> 741829880436539afaf64c50a3e0b4054e11e295
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -58,7 +69,7 @@ const Forms: React.FC = () => {
     e.preventDefault();
     try {
       const endpoint = showForm === "signup" ? "register" : "login";
-      const response = await axios.post(`${backendUrl}/${endpoint}`, formData);
+      const response = await axios.post(`${backendUrl}/user/${endpoint}`, formData);
       if (response) {
         alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
       }
@@ -128,6 +139,7 @@ const Forms: React.FC = () => {
   }
 
   return (
+<<<<<<< HEAD
     <div
       className={`flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4 ${
         isTransitioning ? "animate-fadeOut" : "animate-fadeIn"
@@ -196,6 +208,61 @@ const Forms: React.FC = () => {
         </div>
       )}
     </div>
+=======
+    <>
+
+          {isRestaurant ? (<>
+          
+          <RestaurantAuth close={toggleForm} />
+          </>) : (
+
+            <div className="flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4"
+         style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover' }}>
+
+            <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
+              {showForm === "signup" && (
+                <>
+                  <InputField label="Name" type="text" name="name" />
+                  <InputField label="Username" type="text" name="userName" />
+                  <InputField label="Phone Number" type="text" name="phoneNumber" />
+                  <InputField label="Email" type="email" name="email" />
+                  <InputField label="Password" type="password" name="password" />
+                </>
+              )}
+              {showForm === "Login" && (
+                <>
+                  <InputField label="Username" type="text" name="userName" required={false} />
+                  <InputField label="Email" type="email" name="email" />
+                  <InputField label="Password" type="password" name="password" />
+                </>
+              )}
+              <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out">
+                Submit
+              </button>
+              <div className="mt-4 text-center">
+                {showForm === "signup" ? (
+                  <>
+                    <p onClick={() => setShowForm("Login")} className="text-green-600 cursor-pointer hover:underline">Already a user? Login</p>
+                    <p onClick={() => toggleForm()} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+                  </>
+                ) : showForm === "Login" ? (
+                  <>
+                    <p onClick={() => setShowForm("signup")} className="text-green-600 cursor-pointer hover:underline">New Here? Signup</p>
+                    <p onClick={() => toggleForm()} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+                  </>
+                ) : (
+                  <p className="text-gray-400">SERVICE WILL BE OUT SOON</p>
+                )}
+              </div>
+            </form>
+            </div>
+            
+          )}
+</>
+
+    
+>>>>>>> 741829880436539afaf64c50a3e0b4054e11e295
   );
 };
 
