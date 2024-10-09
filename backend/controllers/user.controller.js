@@ -6,6 +6,8 @@ const secretKey = process.env.SECRET_KEY;
 export const userSignup = async (req, res) => {
   try {
     const { name, userName, email, phoneNumber, password } = req.body;
+
+    console.log({val : req.body})
     if ((!name, !userName, !email, !phoneNumber, !password)) {
       res.json({
         status: false,
