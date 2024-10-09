@@ -74,7 +74,7 @@ export function Header() {
         </section>
       </nav>
 
-      <nav className="Mobile-menu lg-device:hidden">
+      <nav className="Mobile-menu lg-device:hidden sticky top-0 z-50">
         <section className="bg-[#474747] text-xl flex justify-between text-white px-4 py-2  ">
           <div className="flex items-center space-x-4 ">
             <div className="flex items-center gap-1 ">
