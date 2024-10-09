@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
-import axios from 'axios';
+import axios from "axios";
 import backgroundimg from "../assets/bgimg.png";
 
 interface FormData {
@@ -25,27 +25,30 @@ const Forms: React.FC = () => {
     email: "",
     password: "",
   });
+  const [isTransitioning, setIsTransitioning] = useState(false); // State to handle form transitions
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || ""; 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "";
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
-      axios.get(`${backendUrl}/getuser`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(response => {
-        setUserDetails(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching user details:', error);
-      });
+      axios
+        .get(`${backendUrl}/getuser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setUserDetails(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
     }
   }, [backendUrl]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       [e.target.name]: e.target.value,
     }));
@@ -60,13 +63,23 @@ const Forms: React.FC = () => {
         alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
     }
   };
 
-  const [focusedInput, setFocusedInput] = useState<keyof FormData | null>(null); // Track focused input
+  const [focusedInput, setFocusedInput] = useState<keyof FormData | null>(null);
 
-  const InputField = ({ label, type, name, required = true }: { label: string, type: string, name: keyof FormData, required?: boolean }) => {
+  const InputField = ({
+    label,
+    type,
+    name,
+    required = true,
+  }: {
+    label: string;
+    type: string;
+    name: keyof FormData;
+    required?: boolean;
+  }) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -77,7 +90,9 @@ const Forms: React.FC = () => {
 
     return (
       <div className="mb-4">
-        <label htmlFor={name} className="block text-lg text-gray-800 m-1">{label}:</label>
+        <label htmlFor={name} className="block text-lg text-gray-800 m-1">
+          {label}:
+        </label>
         <input
           type={type}
           id={name}
@@ -86,12 +101,21 @@ const Forms: React.FC = () => {
           onChange={handleChange}
           required={required}
           ref={inputRef}
-          onFocus={() => setFocusedInput(name)} // Set focused input on focus
-          onBlur={() => setFocusedInput(null)} // Clear focused input on blur
+          onFocus={() => setFocusedInput(name)}
+          onBlur={() => setFocusedInput(null)}
           className="block w-full px-4 py-2 mt-1 bg-gray-200 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
     );
+  };
+
+  // Handle form transitions with animation
+  const triggerFormTransition = (newForm: "signup" | "Login" | "restaurant") => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setShowForm(newForm);
+      setIsTransitioning(false);
+    }, 500); // Adjust the timing of the animation
   };
 
   if (userDetails) {
@@ -104,10 +128,21 @@ const Forms: React.FC = () => {
   }
 
   return (
-    <div className="flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4"
-         style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover' }}>
-      <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
+    <div
+      className={`flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4 ${
+        isTransitioning ? "animate-fadeOut" : "animate-fadeIn"
+      }`}
+      style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: "cover" }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className={`p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full ${
+          isTransitioning ? "animate-fadeOut" : "animate-fadeIn"
+        }`}
+      >
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">
+          {showForm === "signup" ? "Sign Up" : "Login"}
+        </h2>
         {showForm === "signup" && (
           <>
             <InputField label="Name" type="text" name="name" />
@@ -124,25 +159,42 @@ const Forms: React.FC = () => {
             <InputField label="Password" type="password" name="password" />
           </>
         )}
-        <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out">
+        <button
+          type="submit"
+          className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out"
+        >
           Submit
         </button>
         <div className="mt-4 text-center">
           {showForm === "signup" ? (
             <>
-              <p onClick={() => setShowForm("Login")} className="text-green-600 cursor-pointer hover:underline">Already a user? Login</p>
-              <p onClick={() => setShowForm("restaurant")} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+              <p onClick={() => triggerFormTransition("Login")} className="text-green-600 cursor-pointer hover:underline">
+                Already a user? Login
+              </p>
+              <p onClick={() => triggerFormTransition("restaurant")} className="text-green-600 cursor-pointer hover:underline">
+                Join as restaurant? Register now
+              </p>
             </>
           ) : showForm === "Login" ? (
             <>
-              <p onClick={() => setShowForm("signup")} className="text-green-600 cursor-pointer hover:underline">New Here? Signup</p>
-              <p onClick={() => setShowForm("restaurant")} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+              <p onClick={() => triggerFormTransition("signup")} className="text-green-600 cursor-pointer hover:underline">
+                New Here? Signup
+              </p>
+              <p onClick={() => triggerFormTransition("restaurant")} className="text-green-600 cursor-pointer hover:underline">
+                Join as restaurant? Register now
+              </p>
             </>
           ) : (
             <p className="text-gray-400">SERVICE WILL BE OUT SOON</p>
           )}
         </div>
       </form>
+      {/* Food Animation */}
+      {isTransitioning && (
+        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-50">
+          <div className="text-6xl animate-bounce">🍕</div>
+        </div>
+      )}
     </div>
   );
 };
