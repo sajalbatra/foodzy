@@ -7,21 +7,21 @@ export const Dishdata: MenuItem[] = [
         price: 8.99,
         title: "Classic Pancakes",
         description: "Fluffy pancakes served with maple syrup and butter.",
-        tag: "breakfast"
+        tags: ["breakfast", "dessert"],
     },
     {
         image: "breakfast2.jpg",
         price: 9.99,
         title: "Avocado Toast",
         description: "Sliced avocado on toasted whole grain bread, garnished with cherry tomatoes and a drizzle of olive oil.",
-        tag: "breakfast"
+        tags: ["breakfast"]
     },
     {
         image: "breakfast3.jpg",
         price: 7.49,
         title: "Eggs Benedict",
         description: "Poached eggs and Canadian bacon on English muffins, topped with hollandaise sauce.",
-        tag: "breakfast"
+        tags: ["breakfast"]
     },
     // Main Dishes
     {
@@ -29,21 +29,21 @@ export const Dishdata: MenuItem[] = [
         price: 14.99,
         title: "Grilled Salmon",
         description: "Fresh salmon fillet grilled to perfection, served with steamed vegetables and lemon butter sauce.",
-        tag: "main-dish"
+        tags: ["main-dish"]
     },
     {
         image: "maindish2.jpg",
         price: 12.99,
         title: "Chicken Alfredo Pasta",
         description: "Tender chicken breast pieces tossed with fettuccine pasta in a creamy Alfredo sauce.",
-        tag: "main-dish"
+        tags: ["main-dish"]
     },
     {
         image: Burger,
         price: 11.49,
         title: "Cheese Burger",
         description: "Juicy Cheese patty topped with lettuce, tomato, onion, and your choice of cheese, served with fries.",
-        tag: "main-dish"
+        tags: ["main-dish"]
     },
     // Drinks
     {
@@ -51,21 +51,21 @@ export const Dishdata: MenuItem[] = [
         price: 4.99,
         title: "Berry Smoothie",
         description: "A refreshing blend of mixed berries, yogurt, and honey.",
-        tag: "drink"
+        tags: ["drink"]
     },
     {
         image: "drink2.jpg",
         price: 3.49,
         title: "Iced Caramel Macchiato",
         description: "Espresso poured over ice with milk and sweet caramel syrup.",
-        tag: "drink"
+        tags: ["drink"]
     },
     {
         image: "drink3.jpg",
         price: 2.99,
         title: "Mint Lemonade",
         description: "Freshly squeezed lemon juice mixed with mint syrup and sparkling water.",
-        tag: "drink"
+        tags: ["drink"]
     },
     // Desserts
     {
@@ -73,20 +73,22 @@ export const Dishdata: MenuItem[] = [
         price: 6.99,
         title: "Chocolate Lava Cake",
         description: "Warm chocolate cake with a gooey molten center, served with vanilla ice cream.",
-        tag: "dessert"
+        tags: ["dessert","breakfast"]
     },
     {
         image: "dessert2.jpg",
         price: 5.49,
         title: "Fruit Tart",
         description: "Buttery tart crust filled with pastry cream and topped with fresh seasonal fruits.",
-        tag: "dessert"
+        tags: ["dessert"]
     },
     {
         image: "dessert3.jpg",
         price: 4.99,
         title: "New York Cheesecake",
         description: "Creamy cheesecake on a graham cracker crust, topped with raspberry sauce.",
-        tag: "dessert"
+        tags: ["dessert"]
     }
 ];
+
+
