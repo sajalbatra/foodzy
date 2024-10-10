@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import axios from 'axios';
 import backgroundimg from "../assets/bgimg.png";
-
+import toast from 'react-hot-toast';
 interface FormData {
   name: string;
   userName: string;
@@ -58,6 +58,7 @@ const Forms: React.FC = () => {
       const response = await axios.post(`${backendUrl}/${endpoint}`, formData);
       if (response) {
         alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
+        
       }
     } catch (error) {
       console.error('Error submitting form:', error);
