@@ -5,7 +5,6 @@ import About from "./components/About";
 import Menu from "./components/MenuPage/Menu";
 import Blogs from "./components/Blogs";
 import Forms from "./components/Forms";
-import NotFound from "./components/NotFound"; // Import the 404 component
 
 export default function App() {
   const [showButton, setShowButton] = useState(false);
@@ -36,9 +35,6 @@ export default function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/pages" element={<Blogs />} />
         <Route path="/user" element={<Forms />} />
-        
-        {/* Catch-all route for undefined pages */}
-        <Route path="*" element={<NotFound />} /> {/* This should be the last */}
       </Routes>
 
       {showButton && (
@@ -49,7 +45,7 @@ export default function App() {
             bottom: "50px",
             right: "50px",
             padding: "10px 20px",
-            backgroundColor: "#ffffff",
+            backgroundColor: "#0056b3",
             color: "#F8F9FA",
             borderRadius: "50%",
             border: "none",
