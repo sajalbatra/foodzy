@@ -4,30 +4,90 @@ import Dishecard from './Dishecard';
 import { MenuItem } from './Type';
 
 const Menu = () => {
-  const [category, setCategory] = useState('All');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const filterDishes = (category: string) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchTerm(value);
+    setSelectedCategories([]);
+  };
+
+  const toggleCategory = (category: string) => {
     if (category === 'All') {
-      return Dishdata;
+      setSelectedCategories([]);
     } else {
-      return Dishdata.filter(item => item.tag === category);
+      setSelectedCategories((prevCategories) => {
+        if (prevCategories.includes(category)) {
+          return prevCategories.filter((cat) => cat !== category);
+        } else {
+          return [...prevCategories, category];
+        }
+      });
     }
   };
 
+  const filterDishes = () => {
+    let filteredDishes = Dishdata;
+
+    if (selectedCategories.length > 0) {
+      filteredDishes = filteredDishes.filter((item) =>
+        selectedCategories.every((category) => item.tags.includes(category))
+      );
+    }
+
+    if (searchTerm) {
+      filteredDishes = filteredDishes.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filteredDishes;
+  };
+
+  const getButtonClass = (buttonCategory: string) => {
+    const baseClass = "px-4 py-2 rounded focus:outline-none transition-colors";
+    if (buttonCategory === 'All' && selectedCategories.length === 0) {
+      return `${baseClass} text-red-500 border border-red-500 bg-transparent hover:bg-red-100`;
+    }
+    if (selectedCategories.includes(buttonCategory)) {
+      return `${baseClass} text-red-500 border border-red-500 bg-transparent hover:bg-red-100`;
+    }
+    return `${baseClass} text-white bg-red-500 hover:bg-red-600`;
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center px-4 my-10 text-center ">
+    <div className="flex flex-col items-center justify-center px-4 my-10 text-center">
       <h1 className="mb-4 text-3xl font-semibold">Browse our menu</h1>
-      <p className="mb-8 text-gray-600">We consider all the drivers of change gives you the components you need to change to create a truly happens.</p>
-      <div className="flex flex-wrap justify-center gap-5 mb-8">
-        <button onClick={() => setCategory('All')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none">All</button>
-        <button onClick={() => setCategory('breakfast')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none">Breakfast</button>
-        <button onClick={() => setCategory('main-dish')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none">Main dishes</button>
-        <button onClick={() => setCategory('drink')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none">Drinks</button>
-        <button onClick={() => setCategory('dessert')} className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600 focus:outline-none">Desserts</button>
+      <p className="mb-8 text-gray-600">
+        We consider all the drivers of change gives you the components you need to change to create a truly happens.
+      </p>
+
+      <div className="mb-8">
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search for dishes..."
+          className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-500"
+        />
       </div>
-      <div className="flex flex-wrap justify-around">
-        {filterDishes(category).map((item: MenuItem) => (
-          <div key={item.title} className="w-full px-4 mb-4 sm:w-1/2 md:w-1/3 lg:w-1/4">
+
+      <div className="flex flex-wrap justify-center gap-5 mb-8">
+        <button onClick={() => toggleCategory('All')} className={getButtonClass('All')}>All</button>
+        <button onClick={() => toggleCategory('breakfast')} className={getButtonClass('breakfast')}>Breakfast</button>
+        <button onClick={() => toggleCategory('main-dish')} className={getButtonClass('main-dish')}>Main dishes</button>
+        <button onClick={() => toggleCategory('drink')} className={getButtonClass('drink')}>Drinks</button>
+        <button onClick={() => toggleCategory('dessert')} className={getButtonClass('dessert')}>Desserts</button>
+        <button onClick={() => setSelectedCategories([])} className="px-4 py-2 text-red-500 border border-red-500 rounded bg-transparent hover:bg-red-100 focus:outline-none">
+          Clear Filter
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {filterDishes().map((item: MenuItem) => (
+          <div key={item.title} className="w-full p-4">
             <Dishecard {...item} showTag={false} />
           </div>
         ))}

@@ -48,10 +48,10 @@ export const userSignup = async (req, res) => {
 
     return res.json({
       status: true,
-      message: "Registration successful.",
-      token: token
-    });
-  } catch (error) {
+      message: "Signup successful.",
+      token: token,
+    }); 
+  }catch (error) 
     console.error("Error registering user:", error);
     res
       .status(500)

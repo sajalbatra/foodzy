@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import backgroundimg from "../assets/bgimg.png"
 
 const Hero = () => {
@@ -14,7 +15,9 @@ const Hero = () => {
             Book A Table
           </button>
           <button className="p-1.5 rounded-[118px] bg-[#32CD32] hover:bg-[#66E066]  transition-transform  hover:scale-105 duration-300 ease-out  border border-black text-[1.2rem] px-2">
-            Explore Menu
+            <Link to={"/menu"}>
+              Explore Menu
+            </Link> 
           </button>
         </div>
       </div>

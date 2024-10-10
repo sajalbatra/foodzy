@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import axios from 'axios';
 import backgroundimg from "../assets/bgimg.png";
+import toast, { Toaster } from 'react-hot-toast';
 import RestaurantAuth from "./restaurantAuth/RestaurantAuth";
 
 interface FormData {
@@ -32,7 +33,7 @@ const Forms: React.FC = () => {
   const toggleForm = () => {
     setisRestaurant(!isRestaurant);
   }
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || ""; 
+  const backendUrl = `http://localhost:8080`; 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -61,11 +62,13 @@ const Forms: React.FC = () => {
     e.preventDefault();
     try {
       const endpoint = showForm === "signup" ? "register" : "login";
-      const response = await axios.post(`${backendUrl}/user/${endpoint}`, formData);
+      const response = await axios.post(`${backendUrl}/api/v1/user/${endpoint}`, formData);
       if (response) {
-        alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
+        // alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
+       toast.success(showForm === "signup" ? "User Registered successfully" : "User logged in successfully");
       }
     } catch (error) {
+      toast.error("Error submitting form");
       console.error('Error submitting form:', error);
     }
   };
@@ -83,6 +86,7 @@ const Forms: React.FC = () => {
 
     return (
       <div className="mb-4">
+        <Toaster position="top-right" reverseOrder={false} />
         <label htmlFor={name} className="block text-lg text-gray-800 m-1">{label}:</label>
         <input
           type={type}
