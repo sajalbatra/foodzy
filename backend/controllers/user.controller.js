@@ -44,7 +44,7 @@ export const userSignup = async (req, res) => {
     res.header('X-Token-Expires-In', '3600');
     return res.json({
       status: true,
-      message: "Login successful.",
+      message: "Signup successful.",
       token: token,
     }); 
   }catch (error) {
