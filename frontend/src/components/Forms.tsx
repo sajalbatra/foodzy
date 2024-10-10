@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import axios from 'axios';
 import backgroundimg from "../assets/bgimg.png";
-import toast from 'react-hot-toast';
+import RestaurantAuth from "./restaurantAuth/RestaurantAuth";
+
 interface FormData {
   name: string;
   userName: string;
@@ -25,7 +26,12 @@ const Forms: React.FC = () => {
     email: "",
     password: "",
   });
+  const [isRestaurant, setisRestaurant] = useState<Boolean>(false)
 
+
+  const toggleForm = () => {
+    setisRestaurant(!isRestaurant);
+  }
   const backendUrl = import.meta.env.VITE_BACKEND_URL || ""; 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -55,7 +61,7 @@ const Forms: React.FC = () => {
     e.preventDefault();
     try {
       const endpoint = showForm === "signup" ? "register" : "login";
-      const response = await axios.post(`${backendUrl}/${endpoint}`, formData);
+      const response = await axios.post(`${backendUrl}/user/${endpoint}`, formData);
       if (response) {
         alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
         
@@ -105,46 +111,59 @@ const Forms: React.FC = () => {
   }
 
   return (
-    <div className="flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4"
+    <>
+
+          {isRestaurant ? (<>
+          
+          <RestaurantAuth close={toggleForm} />
+          </>) : (
+
+            <div className="flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4"
          style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover' }}>
-      <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
-        {showForm === "signup" && (
-          <>
-            <InputField label="Name" type="text" name="name" />
-            <InputField label="Username" type="text" name="userName" />
-            <InputField label="Phone Number" type="text" name="phoneNumber" />
-            <InputField label="Email" type="email" name="email" />
-            <InputField label="Password" type="password" name="password" />
-          </>
-        )}
-        {showForm === "Login" && (
-          <>
-            <InputField label="Username" type="text" name="userName" required={false} />
-            <InputField label="Email" type="email" name="email" />
-            <InputField label="Password" type="password" name="password" />
-          </>
-        )}
-        <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out">
-          Submit
-        </button>
-        <div className="mt-4 text-center">
-          {showForm === "signup" ? (
-            <>
-              <p onClick={() => setShowForm("Login")} className="text-green-600 cursor-pointer hover:underline">Already a user? Login</p>
-              <p onClick={() => setShowForm("restaurant")} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
-            </>
-          ) : showForm === "Login" ? (
-            <>
-              <p onClick={() => setShowForm("signup")} className="text-green-600 cursor-pointer hover:underline">New Here? Signup</p>
-              <p onClick={() => setShowForm("restaurant")} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
-            </>
-          ) : (
-            <p className="text-gray-400">SERVICE WILL BE OUT SOON</p>
+
+            <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
+              {showForm === "signup" && (
+                <>
+                  <InputField label="Name" type="text" name="name" />
+                  <InputField label="Username" type="text" name="userName" />
+                  <InputField label="Phone Number" type="text" name="phoneNumber" />
+                  <InputField label="Email" type="email" name="email" />
+                  <InputField label="Password" type="password" name="password" />
+                </>
+              )}
+              {showForm === "Login" && (
+                <>
+                  <InputField label="Username" type="text" name="userName" required={false} />
+                  <InputField label="Email" type="email" name="email" />
+                  <InputField label="Password" type="password" name="password" />
+                </>
+              )}
+              <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out">
+                Submit
+              </button>
+              <div className="mt-4 text-center">
+                {showForm === "signup" ? (
+                  <>
+                    <p onClick={() => setShowForm("Login")} className="text-green-600 cursor-pointer hover:underline">Already a user? Login</p>
+                    <p onClick={() => toggleForm()} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+                  </>
+                ) : showForm === "Login" ? (
+                  <>
+                    <p onClick={() => setShowForm("signup")} className="text-green-600 cursor-pointer hover:underline">New Here? Signup</p>
+                    <p onClick={() => toggleForm()} className="text-green-600 cursor-pointer hover:underline">Join as restaurant? Register now</p>
+                  </>
+                ) : (
+                  <p className="text-gray-400">SERVICE WILL BE OUT SOON</p>
+                )}
+              </div>
+            </form>
+            </div>
+            
           )}
-        </div>
-      </form>
-    </div>
+</>
+
+    
   );
 };
 
