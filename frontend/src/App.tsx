@@ -44,13 +44,15 @@ export default function App() {
             position: "fixed",
             bottom: "50px",
             right: "50px",
-            padding: "10px 20px",
-            backgroundColor: "#0056b3",
+            padding: "10px 20px", 
+            backgroundColor: "teal",
             color: "#F8F9FA",
             borderRadius: "50%",
             border: "none",
             cursor: "pointer",
             boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+            fontSize: "24px",
+            boxSizing: "border-box",
           }}
         >
           ↑
