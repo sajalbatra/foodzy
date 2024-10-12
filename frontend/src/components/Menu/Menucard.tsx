@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { MenuItem } from "./type";
 
 const Menucard = (props: MenuItem) => {
@@ -6,7 +7,7 @@ const Menucard = (props: MenuItem) => {
         <img src={props.image} alt={props.title + ' image'} className="flex items-center mb-2 rounded-md " />
         <p className="mb-1 text-lg font-semibold">{props.title}</p>
         <p className="mb-2 text-sm text-gray-600">{props.description}</p>
-        <a href={props.link} className="text-[#AD343E] text-sm font-semibold hover:underline">Explore Menu</a>
+        <Link to={"/menu"} className="text-[#AD343E] text-sm font-semibold hover:underline">Explore Menu</Link>
       </div>
     )
   }
