@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./Home";
 import About from "./components/About";
+import Menu from "./components/MenuPage/Menu";
 import Blogs from "./components/Blogs";
 import Forms from "./components/Forms";
-import Menu from "./components/MenuPage/Menu";
 
 export default function App() {
   const [showButton, setShowButton] = useState(false);
