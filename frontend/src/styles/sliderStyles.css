@@ -1,0 +1,69 @@
+/* Custom styles for react-slick arrows and dots */
+.slick-arrow {
+    display: block;
+    background-color: rgb(228, 145, 112); /* Black arrows */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+  }
+  
+  .slick-arrow:hover {
+    background-color: #555; /* Hover effect with dark gray color */
+  }
+  
+  .slick-prev, .slick-next {
+    color: black;
+  }
+  
+  .slick-prev {
+    left: -55px; /* Position the previous arrow */
+  }
+  
+  .slick-next {
+    right: -55px; /* Position the next arrow */
+  }
+  
+  .slick-dots {
+    bottom: -30px; /* Adjusted dots position */
+  }
+  
+  .slick-dots li button:before {
+    color: black; /* Black dots */
+    font-size: 16px; /* Increased size for better visibility */
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: #000000; /* Active dot color */
+  }
+  
+  .bg-gray-200 {
+    background-color: #e5e7eb; /* Light gray background for slider */
+  }
+  
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    opacity: 0.75;
+  }
+  
+  .arrow-right {
+    right: -25px; /* Adjust position of the right arrow */
+  }
+  
+  .arrow-left {
+    left: -25px; /* Adjust position of the left arrow */
+  }
+  
+  .arrow:hover {
+    opacity: 1;
+  }
+  
+  .flex-row {
+    display: flex;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent overflow */
+  }
+  
