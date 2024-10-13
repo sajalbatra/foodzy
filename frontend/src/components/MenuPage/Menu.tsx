@@ -32,7 +32,7 @@ const Menu = () => {
 
     if (selectedCategories.length > 0) {
       filteredDishes = filteredDishes.filter((item) =>
-        selectedCategories.every((category) => item.tags.includes(category))
+        selectedCategories.some((category) => item.tags.includes(category))
       );
     }
 
@@ -49,12 +49,12 @@ const Menu = () => {
   const getButtonClass = (buttonCategory: string) => {
     const baseClass = "px-4 py-2 rounded focus:outline-none transition-colors";
     if (buttonCategory === 'All' && selectedCategories.length === 0) {
-      return `${baseClass} text-red-500 border border-red-500 bg-transparent hover:bg-red-100`;
+      return `${baseClass} text-white border border-red-500 bg-red-500 hover:bg-red-100`;
     }
     if (selectedCategories.includes(buttonCategory)) {
-      return `${baseClass} text-red-500 border border-red-500 bg-transparent hover:bg-red-100`;
+      return `${baseClass} text-white bg-red-500 hover:bg-red-600`;
     }
-    return `${baseClass} text-white bg-red-500 hover:bg-red-600`;
+    return `${baseClass} text-red-500 border border-red-500 bg-transparent hover:bg-red-100`;
   };
 
   return (
