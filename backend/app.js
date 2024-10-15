@@ -5,11 +5,7 @@ import restaurantRouter from "./routes/restaurant.route.js"
 
 const app=express()
 app.use(express.json());
-const corsOptions = {
-    origin: '*'
-};
-app.use(cors(corsOptions));
-
+app.use(cors())
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/restaurant",restaurantRouter)
 
