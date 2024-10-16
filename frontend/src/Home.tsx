@@ -1,3 +1,4 @@
+import ChatbotComponent from "./components/chatbot/ChatbotComponent"
 import Blogs from "./components/Blogs"
 import Hero from "./components/Hero"
 import Menu from "./components/Menu/Menu"
@@ -7,6 +8,7 @@ export default function Home() {
     <>
     <Hero/>
     <Menu/>
+    <ChatbotComponent />
     <Testimonals/>
     <Blogs/>
     </>
