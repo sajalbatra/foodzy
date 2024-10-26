@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@botpress/webchat": "^2.2.16",
     "axios": "^1.7.7",
     "foodzy": "file:",
     "react": "^18.2.0",

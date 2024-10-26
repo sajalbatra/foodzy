@@ -8,14 +8,16 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 
-const corsOptions = {
+app.use(cors({
   origin: "*"
-};
-app.use(cors(corsOptions));
-
+}));
 
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/restaurant",restaurantRouter)
 
 
-export { app };
+
+
+
+export {app}
+

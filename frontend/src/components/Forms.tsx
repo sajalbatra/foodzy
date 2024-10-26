@@ -33,7 +33,7 @@ const Forms: React.FC = () => {
   const toggleForm = () => {
     setisRestaurant(!isRestaurant);
   }
-  const backendUrl = `http://localhost:8080`; 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || ""; 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -62,8 +62,7 @@ const Forms: React.FC = () => {
     e.preventDefault();
     try {
       const endpoint = showForm === "signup" ? "register" : "login";
-      const response = await axios.post(`${backendUrl}/api/v1/user/${endpoint}`, formData);
-      if (response) {
+      const response = await axios.post(`${backendUrl}/${endpoint}`, formData);      if (response) {
         // alert(showForm === "signup" ? "User Registered successfully" : "User signed in successfully");
        toast.success(showForm === "signup" ? "User Registered successfully" : "User logged in successfully");
       }
@@ -87,7 +86,7 @@ const Forms: React.FC = () => {
     return (
       <div className="mb-4">
         <Toaster position="top-right" reverseOrder={false} />
-        <label htmlFor={name} className="block text-lg text-gray-800 m-1">{label}:</label>
+        <label htmlFor={name} className="block m-1 text-lg text-gray-800">{label}:</label>
         <input
           type={type}
           id={name}
@@ -98,7 +97,7 @@ const Forms: React.FC = () => {
           ref={inputRef}
           onFocus={() => setFocusedInput(name)} // Set focused input on focus
           onBlur={() => setFocusedInput(null)} // Clear focused input on blur
-          className="block w-full px-4 py-2 mt-1 bg-gray-200 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="block w-full px-4 py-2 mt-1 text-gray-800 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
         />
       </div>
     );
@@ -106,7 +105,7 @@ const Forms: React.FC = () => {
 
   if (userDetails) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+      <div className="flex flex-col items-center justify-center h-screen text-white bg-gray-900">
         <h1 className="text-2xl">Welcome, {userDetails.name}</h1>
         <p>Email: {userDetails.email}</p>
       </div>
@@ -121,11 +120,11 @@ const Forms: React.FC = () => {
           <RestaurantAuth close={toggleForm} />
           </>) : (
 
-            <div className="flex m-3 sm:m-0 flex-col items-center justify-center min-h-screen mt-1 py-4"
+            <div className="flex flex-col items-center justify-center min-h-screen py-4 m-3 mt-1 sm:m-0"
          style={{ backgroundImage: `url(${backgroundimg})`, backgroundSize: 'cover' }}>
 
-            <form onSubmit={handleSubmit} className="p-8 rounded-lg shadow-lg bg-white bg-opacity-80 backdrop-blur-lg max-w-md w-full">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
+            <form onSubmit={handleSubmit} className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg bg-opacity-80 backdrop-blur-lg">
+              <h2 className="mb-4 text-2xl font-semibold text-center text-gray-800">{showForm === "signup" ? "Sign Up" : "Login"}</h2>
               {showForm === "signup" && (
                 <>
                   <InputField label="Name" type="text" name="name" />
@@ -142,7 +141,7 @@ const Forms: React.FC = () => {
                   <InputField label="Password" type="password" name="password" />
                 </>
               )}
-              <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none transition duration-300 ease-in-out">
+              <button type="submit" className="block w-full px-4 py-2 mt-4 text-xl font-semibold text-white transition duration-300 ease-in-out bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none">
                 Submit
               </button>
               <div className="mt-4 text-center">
